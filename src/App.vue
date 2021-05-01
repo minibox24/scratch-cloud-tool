@@ -14,9 +14,15 @@ import Dash from '../src/components/Dash'
 export default {
   data () {
     return {
-      isProjectPage: true,
+      isProjectPage: false,
       isConnect: false
     }
+  },
+  mounted () {
+    this.$chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+      const url = tabs[0].url
+      this.isProjectPage = url.includes('://scratch.mit.edu/projects/')
+    })
   },
   components: { Connect, NotHere, Dash }
 }

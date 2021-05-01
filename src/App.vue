@@ -1,15 +1,38 @@
 <template>
   <div id="app">
-    <span>Hello, World!</span>
+    <NotHere v-if="!isProjectPage"/>
+    <Connect v-else-if="!isConnect"/>
+    <Dash v-else/>
   </div>
 </template>
 
+<script>
+import Connect from '../src/components/Connect'
+import NotHere from '../src/components/NotHere'
+import Dash from '../src/components/Dash'
+
+export default {
+  data () {
+    return {
+      isProjectPage: false,
+      isConnect: false
+    }
+  },
+  components: { Connect, NotHere, Dash }
+}
+</script>
+
 <style>
+body {
+  margin: 0;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  padding: 1rem;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: #36393F;
+  color: white;
 }
 </style>

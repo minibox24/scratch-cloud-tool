@@ -14,7 +14,7 @@ import Dash from '../src/components/Dash'
 export default {
   data () {
     return {
-      isProjectPage: false,
+      isProjectPage: true,
       isConnect: false
     }
   },

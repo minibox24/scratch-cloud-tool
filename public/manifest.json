@@ -16,5 +16,8 @@
       "128": "icons/128.png"
     }
   },
-  "permissions": ["tabs"]
+  "permissions": ["tabs", "scripting"],
+  "host_permissions": [
+    "*://scratch.mit.edu/project/*"
+  ]
 }

@@ -4,16 +4,42 @@
     <div class="options">
       <label class="option" for="nickname">
         <span class="input-label">닉네임</span>
-        <input id="nickname" class="input">
+        <input id="nickname" class="input" v-model="name">
       </label>
       <label class="option" for="project-id">
         <span class="input-label">프로젝트 ID</span>
-        <input id="project-id" class="input">
+        <input id="project-id" class="input" v-model="id">
       </label>
     </div>
     <button class="connect">서버 연결</button>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      name: '',
+      id: ''
+    }
+  },
+  mounted () {
+    this.$chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+      this.tabId = tabs[0].id
+      this.id = parseInt(tabs[0].url.split('/')[4])
+
+      this.$chrome.scripting.executeScript({
+        target: { tabId: this.tabId },
+        function () {
+          return document.querySelector('#navigation > div > ul > li.link.right.account-nav > div > a > span').innerText
+        }
+      }, result => {
+        this.name = result[0].result
+      })
+    })
+  }
+}
+</script>
 
 <style scoped>
 .view {
